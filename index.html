@@ -188,46 +188,49 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
 <section style="background:var(--black);">
   <div class="w">
     <h2 class="big sol-head">Your new team and operating system.<br>Built just for you.</h2>
-    <p class="sol-sub">Any AI is only as smart as the data behind it. MCP connects your AI to the richest fan data in music, so it works like your analyst and strategist, reading your real fans to find opportunities, shape strategy, and tell you exactly what to do next.</p>
-    <div style="max-width:820px; margin:56px auto 0;">
-      <svg viewBox="0 0 820 312" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+    <p class="sol-sub">MCP connects your AI to the richest fan data in music. It becomes your analyst and strategist, reading your real fans to find opportunities, shape strategy, and tell you exactly what to do next.</p>
+    <div style="max-width:860px; margin:56px auto 0;">
+      <svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
         <defs>
           <radialGradient id="teamhub" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="rgba(245,197,24,0.22)"/>
-            <stop offset="100" stop-color="rgba(245,197,24,0.03)"/>
+            <stop offset="0" stop-color="rgba(245,197,24,0.25)"/>
+            <stop offset="100" stop-color="rgba(245,197,24,0.04)"/>
           </radialGradient>
         </defs>
-        <!-- connecting lines: you to roles, roles to data -->
-        <g stroke="rgba(245,197,24,0.22)" stroke-width="1.5">
-          <line x1="410" y1="68" x2="230" y2="128"/>
-          <line x1="410" y1="68" x2="590" y2="128"/>
-          <line x1="230" y1="200" x2="410" y2="246"/>
-          <line x1="590" y1="200" x2="410" y2="246"/>
+        <!-- horizontal flow arrows between stages -->
+        <g stroke="rgba(245,197,24,0.3)" stroke-width="1.5">
+          <line x1="196" y1="100" x2="232" y2="100"/>
+          <line x1="404" y1="100" x2="440" y2="100"/>
+          <line x1="612" y1="100" x2="648" y2="100"/>
         </g>
-        <!-- top: artist (you) in command -->
+        <g fill="#F5C518">
+          <path d="M232 100 l-9 -5 0 10 z"/>
+          <path d="M440 100 l-9 -5 0 10 z"/>
+          <path d="M648 100 l-9 -5 0 10 z"/>
+        </g>
+        <!-- 1: your fan data (source) -->
         <g>
-          <circle cx="410" cy="40" r="48" fill="url(#teamhub)"/>
-          <rect x="330" y="22" width="160" height="40" rx="20" fill="#F5C518"/>
-          <text x="410" y="47" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="18" fill="#0A0A0A">YOU</text>
+          <rect x="8" y="64" width="188" height="72" rx="10" fill="#1C1C1C" stroke="rgba(245,197,24,0.4)"/>
+          <text x="102" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="15" fill="#F5C518">YOUR FAN DATA</text>
+          <text x="102" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">the complete fan graph</text>
         </g>
-        <!-- middle: two roles working for you -->
-        <g font-family="Inter, sans-serif">
-          <!-- strategist -->
-          <rect x="120" y="128" width="220" height="72" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
-          <text x="230" y="156" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="17" fill="#FFFFFF">STRATEGIST</text>
-          <text x="230" y="176" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.5)">finds the opportunities,</text>
-          <text x="230" y="189" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.5)">builds the plan</text>
-          <!-- analyst -->
-          <rect x="480" y="128" width="220" height="72" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
-          <text x="590" y="156" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="17" fill="#FFFFFF">ANALYST</text>
-          <text x="590" y="176" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.5)">reads the data,</text>
-          <text x="590" y="189" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.5)">surfaces what matters</text>
-        </g>
-        <!-- bottom: fan data as the shared source -->
+        <!-- 2: analyst -->
         <g>
-          <rect x="300" y="246" width="220" height="56" rx="10" fill="#1C1C1C" stroke="rgba(245,197,24,0.4)"/>
-          <text x="410" y="270" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="17" fill="#F5C518">YOUR FAN DATA</text>
-          <text x="410" y="289" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.5)">the complete fan graph they work from</text>
+          <rect x="232" y="64" width="172" height="72" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
+          <text x="318" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF">ANALYST</text>
+          <text x="318" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">makes sense of it</text>
+        </g>
+        <!-- 3: strategist -->
+        <g>
+          <rect x="440" y="64" width="172" height="72" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
+          <text x="526" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF">STRATEGIST</text>
+          <text x="526" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">builds the plan</text>
+        </g>
+        <!-- 4: your next move (the payoff) -->
+        <g>
+          <rect x="648" y="60" width="204" height="80" rx="10" fill="url(#teamhub)" stroke="#F5C518" stroke-width="1.5"/>
+          <text x="750" y="96" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="16" fill="#F5C518">YOUR NEXT MOVE</text>
+          <text x="750" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.6)">clear, and ready to run</text>
         </g>
       </svg>
     </div>
@@ -240,7 +243,7 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
 <section style="background:var(--black);">
   <div class="w" style="max-width:900px;">
     <h2 class="big" style="font-size:clamp(34px,4.6vw,52px); text-align:center; margin-bottom:24px; color:var(--gold);">How It Works</h2>
-    <p style="font-size:18px; color:var(--off); line-height:1.7; text-align:center; max-width:680px; margin:0 auto 48px;">MCP, the Model Context Protocol, is the connection between your Openstage fan data and the AI you already use. No exports, no spreadsheets, no learning curve. Connect once, then ask anything in plain English.</p>
+    <p style="font-size:18px; color:var(--off); line-height:1.7; text-align:center; max-width:680px; margin:0 auto 48px;">MCP, the Model Context Protocol, is the connection between your Openstage fan data and your AI. No exports, no spreadsheets, no learning curve. Connect once, then ask anything in plain English.</p>
     <div class="steps">
       <div class="step">
         <div class="step-n">1</div>
@@ -392,7 +395,7 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
 <section style="background:var(--black);">
   <div class="w">
     <h2 class="big" style="font-size:clamp(34px,4.6vw,52px); text-align:center; color:var(--gold);">Your fans are worth more on Openstage.</h2>
-    <p style="font-size:17px; color:var(--off); line-height:1.65; max-width:660px; margin:24px auto 0; text-align:center;">Your AI is only as smart as the data behind it. On Openstage, every fan carries a complete behavioral record built over time. That's exactly what your AI needs to build better experiences, deepen fandom, and drive revenue.<br>Better data in, more valuable fans out.</p>
+    <p style="font-size:17px; color:var(--off); line-height:1.65; max-width:660px; margin:24px auto 0; text-align:center;">Your AI is only as smart as the data behind it. On Openstage, every fan carries a complete behavioral record built over time. That's exactly what your AI needs to build intent, deepen fandom, and drive revenue.<br>Better data in, more valuable fans out.</p>
     <div style="max-width:620px; margin:56px auto 0;">
       <svg viewBox="0 0 620 420" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
         <defs>
@@ -513,7 +516,7 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
         <div class="ba-cell new">The insight comes back already actionable</div>
         <div class="ba-cell new">Your AI does it, no one to hire</div>
         <div class="ba-cell new">It runs in seconds, not days</div>
-        <div class="ba-cell new">One connection, inside the AI you already use</div>
+        <div class="ba-cell new">One connection, inside your AI</div>
         <div class="ba-cell new">It all lives in one place, ready to query</div>
       </div>
     </div>
@@ -551,7 +554,7 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
   <div class="w" style="max-width:760px;">
     <h2 class="big" style="font-size:clamp(34px,4.6vw,52px); text-align:center; color:var(--gold);">Frequently Asked Questions</h2>
     <div class="faq">
-      <div class="faq-item open"><div class="faq-q">What is MCP?</div><div class="faq-a">MCP stands for Model Context Protocol. It is the connection between your Openstage fan data and the AI you already use, like Claude. Connect once, then ask any question about your fans in plain English and get real answers back.</div></div>
+      <div class="faq-item open"><div class="faq-q">What is MCP?</div><div class="faq-a">MCP stands for Model Context Protocol. It is the connection between your Openstage fan data and your AI, like Claude. Connect once, then ask any question about your fans in plain English and get real answers back.</div></div>
       <div class="faq-item"><div class="faq-q">Do I need a developer?</div><div class="faq-a">No. Generate a key in Artist Settings, paste it at the authorize page, copy one command. Under two minutes.</div></div>
       <div class="faq-item"><div class="faq-q">Which AI tools work with it?</div><div class="faq-a">MCP is an open standard, so it works with any AI tool that supports it. Claude (desktop and browser), Claude Code, ChatGPT, Gemini, Copilot, Cursor, Windsurf, Perplexity, and more. If your tool speaks MCP, it works. Claude is the most popular starting point, and connecting takes about two minutes.</div></div>
       <div class="faq-item"><div class="faq-q">Which plans include it?</div><div class="faq-a">Build and Legendary.</div></div>
