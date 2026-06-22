@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MCP — Connect Your Fan Data to Your AI</title>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 :root {
@@ -51,6 +51,15 @@ section { padding:88px 24px; }
 .feat-visual svg { width:100%; height:auto; display:block; }
 
 /* BEFORE / AFTER as two-column grid of cells */
+.ba-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:48px; }
+.ba-col-head { font-size:12px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; padding-bottom:4px; }
+.ba-col-head.old { color:var(--red); }
+.ba-col-head.new { color:var(--gold); }
+.ba-cell { border:1px solid var(--bord); border-radius:8px; padding:16px 18px; font-size:13px; line-height:1.5; display:flex; gap:10px; align-items:flex-start; margin-bottom:12px; }
+.ba-cell.old { background:var(--surf); color:var(--mut); }
+.ba-cell.new { background:var(--s2); color:var(--off); }
+.ba-cell.old::before { content:'\2715'; color:var(--red); font-size:10px; flex-shrink:0; margin-top:3px; font-weight:700; }
+.ba-cell.new::before { content:'\2713'; color:var(--gold); font-size:10px; flex-shrink:0; margin-top:3px; font-weight:700; }
 
 /* HOW - rule of three, one line */
 .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:48px; align-items:stretch; }
@@ -71,14 +80,26 @@ section { padding:88px 24px; }
 .uc-cat-name { font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; font-size:22px; color:var(--white); line-height:1; }
 
 .uc { background:var(--black); border:1px solid var(--bord); border-radius:6px; padding:16px 18px; font-size:13px; color:var(--off); line-height:1.45; font-style:italic; }
-.uc.act { border-color:rgba(245,197,24,0.25); color:var(--gold); }
+.uc.act { border-color:rgba(245,197,24,0.25); }
 
 /* CASE STUDY */
+.case { margin-top:48px; background:linear-gradient(140deg,#161000 0%,var(--surf) 60%); border:1px solid rgba(245,197,24,.16); border-radius:10px; padding:48px 44px; }
+.case-top { display:flex; align-items:baseline; justify-content:center; gap:16px; margin-bottom:28px; flex-wrap:wrap; }
+.case-sub { font-family:'Barlow Condensed',sans-serif; font-weight:800; text-transform:uppercase; font-size:40px; color:var(--gold); line-height:1; }
+.case-tag { font-size:11px; color:var(--mut); letter-spacing:.06em; text-transform:uppercase; }
+.case-lead { font-size:16px; color:var(--off); line-height:1.6; max-width:680px; margin:0 auto 32px; text-align:center; }
+.case-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--bord); border:1px solid var(--bord); border-radius:8px; overflow:hidden; }
 .cstat { background:var(--surf); padding:24px 20px; text-align:center; }
 .cstat-n { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:40px; color:var(--gold); line-height:1; }
 .cstat-l { font-size:12px; color:var(--mut); margin-top:6px; letter-spacing:.04em; text-transform:uppercase; }
+.case-ph { font-size:11px; color:var(--mut); margin-top:24px; letter-spacing:.06em; text-transform:uppercase; text-align:center; }
 
 /* PROOF */
+.pgrid { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--bord); border:1px solid var(--bord); border-radius:8px; overflow:hidden; margin-top:40px; }
+.pc { background:var(--surf); padding:22px 22px; display:grid; grid-template-columns:28px 1fr; gap:12px; align-items:start; }
+.pn { font-family:'Barlow Condensed',sans-serif; font-weight:800; font-size:20px; color:var(--gold); line-height:1; padding-top:2px; }
+.pask { font-size:11px; color:var(--mut); font-style:italic; margin-bottom:6px; line-height:1.4; }
+.ptit { font-size:13px; font-weight:600; color:var(--white); }
 
 /* FAQ */
 .faq { display:flex; flex-direction:column; gap:2px; margin-top:48px; }
@@ -106,10 +127,12 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
   .hero-inner{grid-template-columns:1fr; gap:40px;} .hero-copy{text-align:left;}
   .feat,.feat.flip{grid-template-columns:1fr; gap:32px;}
   .feat.flip .feat-copy{order:1;} .feat.flip .feat-visual{order:2;}
-
+  .ba-grid{grid-template-columns:1fr;}
   .steps,.steps-rule{grid-template-columns:1fr; gap:24px;}
   .uc-headrow{display:none;} .uc-block{grid-template-columns:1fr; gap:10px; margin-top:24px;}
   
+  .pgrid{grid-template-columns:1fr;}
+  .case-stats{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -130,30 +153,28 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
       <a href="#start" class="gb">Get Started</a>
     </div>
     <div class="hero-visual">
-      <svg viewBox="0 0 460 326" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="hgs" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="#1C1C1C"/><stop offset="1" stop-color="#141414"/>
           </linearGradient>
         </defs>
-        <rect x="0" y="0" width="460" height="326" rx="12" fill="url(#hgs)" stroke="rgba(255,255,255,0.08)"/>
+        <rect x="0" y="0" width="460" height="320" rx="12" fill="url(#hgs)" stroke="rgba(255,255,255,0.08)"/>
         <circle cx="24" cy="26" r="5" fill="#FF5C5C"/><circle cx="42" cy="26" r="5" fill="#F5C518"/><circle cx="60" cy="26" r="5" fill="#3ECF8E"/>
         <text x="436" y="30" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="11" fill="rgba(255,255,255,0.42)">Claude</text>
         <line x1="0" y1="50" x2="460" y2="50" stroke="rgba(255,255,255,0.08)"/>
-        <rect x="74" y="60" width="362" height="74" rx="10" fill="rgba(245,197,24,0.10)" stroke="rgba(245,197,24,0.22)"/>
-        <text x="92" y="79" font-family="Inter, sans-serif" font-size="12" fill="#DEDEDE">Who are my top 250 fans in London who</text>
-        <text x="92" y="95" font-family="Inter, sans-serif" font-size="12" fill="#DEDEDE">pre-saved my latest single and bought from</text>
-        <text x="92" y="111" font-family="Inter, sans-serif" font-size="12" fill="#DEDEDE">my store, but haven't grabbed a ticket to</text>
-        <text x="92" y="127" font-family="Inter, sans-serif" font-size="12" fill="#DEDEDE">my next show yet?</text>
-        <rect x="24" y="150" width="320" height="18" rx="6" fill="rgba(255,255,255,0.05)"/>
-        <text x="34" y="163" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Reading your fan graph...</text>
-        <rect x="24" y="178" width="412" height="124" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
-        <text x="40" y="206" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="24" fill="#F5C518">250 FANS</text>
-        <text x="40" y="225" font-family="Inter, sans-serif" font-size="10.5" fill="#DEDEDE">Pre-saved &#183; bought before &#183; no ticket yet</text>
-        <rect x="40" y="238" width="200" height="6" rx="3" fill="rgba(245,197,24,0.5)"/>
-        <rect x="40" y="251" width="140" height="6" rx="3" fill="rgba(245,197,24,0.3)"/>
-        <rect x="40" y="264" width="170" height="6" rx="3" fill="rgba(245,197,24,0.2)"/>
-        <text x="40" y="290" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.55)">3 moves to convert them &#8594;</text>
+        <rect x="90" y="68" width="346" height="44" rx="10" fill="rgba(245,197,24,0.10)" stroke="rgba(245,197,24,0.22)"/>
+        <text x="108" y="87" font-family="Inter, sans-serif" font-size="12" fill="#DEDEDE">Who are my most engaged fans who</text>
+        <text x="108" y="103" font-family="Inter, sans-serif" font-size="12" fill="#DEDEDE">haven't purchased yet?</text>
+        <rect x="24" y="128" width="320" height="18" rx="6" fill="rgba(255,255,255,0.05)"/>
+        <text x="34" y="141" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.55)">Reading your fan graph...</text>
+        <rect x="24" y="156" width="412" height="140" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.08)"/>
+        <text x="40" y="186" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="24" fill="#F5C518">48,000 FANS</text>
+        <text x="40" y="206" font-family="Inter, sans-serif" font-size="11" fill="#DEDEDE">High intent. Never purchased.</text>
+        <rect x="40" y="222" width="200" height="6" rx="3" fill="rgba(245,197,24,0.5)"/>
+        <rect x="40" y="236" width="140" height="6" rx="3" fill="rgba(245,197,24,0.3)"/>
+        <rect x="40" y="250" width="170" height="6" rx="3" fill="rgba(245,197,24,0.2)"/>
+        <text x="40" y="280" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.55)">3 moves to convert them &#8594;</text>
       </svg>
     </div>
   </div>
@@ -161,65 +182,51 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
 <!-- SOLUTION + ALTERNATING BLOCKS -->
 <section style="background:var(--black);">
   <div class="w">
-    <h2 class="big sol-head">Your AI now knows your fans.</h2>
-    <p class="sol-sub">MCP connects your AI to the richest fan data in music to become your new audience development operating system. It reads your real fans to find opportunities, shape strategy, and tell you exactly what to do next.</p>
+    <h2 class="big sol-head">Your new team and operating system.<br>Built just for you.</h2>
+    <p class="sol-sub">MCP connects your AI to the richest fan data in music. It becomes your analyst and strategist, reading your real fans to find opportunities, shape strategy, and tell you exactly what to do next.</p>
     <div style="max-width:860px; margin:56px auto 0;">
-      <svg viewBox="0 0 860 280" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
+      <svg viewBox="0 0 860 200" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block;">
         <defs>
           <radialGradient id="teamhub" cx="50%" cy="50%" r="50%">
-            <stop offset="0" stop-color="rgba(245,197,24,0.28)"/>
+            <stop offset="0" stop-color="rgba(245,197,24,0.25)"/>
             <stop offset="100" stop-color="rgba(245,197,24,0.04)"/>
           </radialGradient>
         </defs>
-
-        <!-- connecting arrows between the four blocks -->
+        <!-- horizontal flow arrows between stages -->
         <g stroke="rgba(245,197,24,0.3)" stroke-width="1.5">
-          <line x1="186" y1="140" x2="218" y2="140"/>
-          <line x1="330" y1="140" x2="362" y2="140"/>
-          <line x1="520" y1="140" x2="552" y2="140"/>
+          <line x1="196" y1="100" x2="232" y2="100"/>
+          <line x1="404" y1="100" x2="440" y2="100"/>
+          <line x1="612" y1="100" x2="648" y2="100"/>
         </g>
         <g fill="#F5C518">
-          <path d="M218 140 l-9 -5 0 10 z"/>
-          <path d="M362 140 l-9 -5 0 10 z"/>
-          <path d="M552 140 l-9 -5 0 10 z"/>
+          <path d="M232 100 l-9 -5 0 10 z"/>
+          <path d="M440 100 l-9 -5 0 10 z"/>
+          <path d="M648 100 l-9 -5 0 10 z"/>
         </g>
-
-        <!-- 1: your Openstage fan data -->
-        <rect x="20" y="94" width="166" height="92" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-        <text x="103" y="126" text-anchor="middle" font-family="Anton, sans-serif" font-size="13" fill="#F5C518">YOUR OPENSTAGE</text>
-        <text x="103" y="144" text-anchor="middle" font-family="Anton, sans-serif" font-size="13" fill="#F5C518">FAN DATA</text>
-        <rect x="36" y="156" width="134" height="20" rx="6" fill="#252525"/>
-        <text x="103" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="rgba(255,255,255,0.6)">your complete fan graph</text>
-
-        <!-- 2: MCP connection -->
-        <rect x="218" y="118" width="112" height="44" rx="22" fill="#161616" stroke="#F5C518" stroke-width="1.5"/>
-        <text x="274" y="138" text-anchor="middle" font-family="Anton, sans-serif" font-size="14" fill="#F5C518">MCP</text>
-        <text x="274" y="153" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="rgba(255,255,255,0.5)">secure connection</text>
-
-        <!-- 3: your AI (ranked list) -->
-        <rect x="362" y="80" width="158" height="120" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
-        <text x="441" y="100" text-anchor="middle" font-family="Anton, sans-serif" font-size="12" fill="#FFFFFF">YOUR AI</text>
-        <g font-family="Inter, sans-serif" font-size="10.5">
-          <rect x="378" y="108" width="126" height="22" rx="6" fill="#252525"/>
-          <text x="389" y="123" fill="#FFFFFF">Claude</text>
-          <rect x="378" y="134" width="126" height="22" rx="6" fill="#252525"/>
-          <text x="389" y="149" fill="#DEDEDE">ChatGPT</text>
-          <rect x="378" y="160" width="126" height="22" rx="6" fill="#252525"/>
-          <text x="389" y="175" fill="#DEDEDE">Gemini</text>
+        <!-- 1: your fan data (source) -->
+        <g>
+          <rect x="8" y="64" width="188" height="72" rx="10" fill="#1C1C1C" stroke="rgba(245,197,24,0.4)"/>
+          <text x="102" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="15" fill="#F5C518">YOUR FAN DATA</text>
+          <text x="102" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">the complete fan graph</text>
         </g>
-        <text x="378" y="195" font-family="Inter, sans-serif" font-size="7.5" fill="rgba(255,255,255,0.4)">+ Cursor, Perplexity, any MCP tool</text>
-
-        <!-- 4: prompt + answer -->
-        <rect x="552" y="56" width="288" height="162" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-        <text x="696" y="80" text-anchor="middle" font-family="Anton, sans-serif" font-size="12" fill="#FFFFFF">PROMPT &amp; ANSWER</text>
-        <!-- the prompt -->
-        <rect x="568" y="90" width="256" height="30" rx="8" fill="#252525"/>
-        <text x="580" y="109" font-family="Inter, sans-serif" font-size="10.5" fill="#DEDEDE">"Who are my top fans in Los Angeles?"</text>
-        <!-- the answer -->
-        <rect x="568" y="128" width="256" height="78" rx="8" fill="#252525" stroke="#F5C518" stroke-width="1.5"/>
-        <text x="580" y="149" font-family="Inter, sans-serif" font-weight="600" font-size="10.5" fill="#F5C518">Aware of your fans, in real time</text>
-        <text x="580" y="169" font-family="Inter, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.7)">Answered straight from your</text>
-        <text x="580" y="183" font-family="Inter, sans-serif" font-size="9.5" fill="rgba(255,255,255,0.7)">Openstage fan data, the moment you ask.</text>
+        <!-- 2: analyst -->
+        <g>
+          <rect x="232" y="64" width="172" height="72" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
+          <text x="318" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF">ANALYST</text>
+          <text x="318" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">makes sense of it</text>
+        </g>
+        <!-- 3: strategist -->
+        <g>
+          <rect x="440" y="64" width="172" height="72" rx="10" fill="#1C1C1C" stroke="rgba(255,255,255,0.12)"/>
+          <text x="526" y="94" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="15" fill="#FFFFFF">STRATEGIST</text>
+          <text x="526" y="113" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.5)">builds the plan</text>
+        </g>
+        <!-- 4: your next move (the payoff) -->
+        <g>
+          <rect x="648" y="60" width="204" height="80" rx="10" fill="url(#teamhub)" stroke="#F5C518" stroke-width="1.5"/>
+          <text x="750" y="96" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="16" fill="#F5C518">YOUR NEXT MOVE</text>
+          <text x="750" y="115" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="rgba(255,255,255,0.6)">clear, and ready to run</text>
+        </g>
       </svg>
     </div>
   </div>
@@ -240,12 +247,12 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
         <div class="step-n">2</div>
         <h3>Ask</h3>
         <p>Open Claude. Your fan graph is live. Ask anything in plain English.</p>
-        <div class="step-note">Informed by your real data</div>
+        <div class="step-note">Answers from your real data</div>
       </div>
       <div class="step">
         <div class="step-n">3</div>
-        <h3>Receive</h3>
-        <p>Get your answer back, the analysis and the plan, ready for you and your team to run.</p>
+        <h3>Act on it</h3>
+        <p>Get the strategy, the analysis, and the plan, ready for you and your team to run.</p>
         <div class="step-note">Your answer, in seconds</div>
       </div>
     </div>
@@ -259,8 +266,8 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
     <div class="feat flip">
       <div class="feat-copy">
         <div class="f-label">Analyze</div>
-        <div class="f-title">See what you couldn't.<br>Every data point, now cross-referenced.</div>
-        <p class="f-copy">Any dashboard can filter by location and age. None of them can tell you which of those fans actually matter most. That takes context, weighing how they listen, spend, and show up. It's the difference between filtering and understanding, and it's what your AI brings to your real data.</p>
+        <div class="f-title">Not just data.<br>Answers you can act on.</div>
+        <p class="f-copy">Ask anything and get back more than a number. It synthesizes everything your fans are doing and puts it in context, what it means for you, your goals, your audience. Not generic output. Relevant to you, powered by your actual data.</p>
       </div>
       <div class="feat-visual">
         <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
@@ -289,7 +296,7 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
       <div class="feat-copy">
         <div class="f-label">Strategize</div>
         <div class="f-title">Where to play.<br>How to win.</div>
-        <p class="f-copy">It doesn't stop at who your fans are. It tells you what to do about them, where to focus and what move comes next, to deliver on your goals and strengthen those relationships. Specific to you and no one else.</p>
+        <p class="f-copy">It turns what it knows about your fans into real strategy. Where to focus your energy, and how to turn that focus into real outcomes. Built around your audience and your goals, specific to you and no one else.</p>
       </div>
       <div class="feat-visual">
         <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
@@ -329,58 +336,38 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
         <p class="f-copy">Your fan data goes wherever you do. Filter it, segment it, and bring it into whatever tools you and your team already use. Most platforms call it control. But only inside their walls. Openstage is actually open.</p>
       </div>
       <div class="feat-visual">
-        <svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="420" height="360" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.08)"/>
-
-          <!-- TOP: OTHER PLATFORMS, locked -->
-          <text x="24" y="34" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.42)" letter-spacing="1">OTHER PLATFORMS</text>
-          <!-- data locked in -->
-          <circle cx="120" cy="98" r="42" fill="#161616" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
-          <text x="120" y="92" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="12" fill="rgba(255,255,255,0.5)">YOUR DATA</text>
-          <!-- locked padlock icon (closed shackle) -->
-          <g transform="translate(110,104)">
-            <path d="M3 7 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
-            <rect x="0" y="7" width="20" height="15" rx="2.5" fill="rgba(255,255,255,0.45)"/>
-            <circle cx="10" cy="14" r="1.6" fill="#161616"/>
+        <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="420" height="300" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.08)"/>
+          <text x="24" y="34" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.42)" letter-spacing="1">YOUR DATA, ANYWHERE</text>
+          <rect x="24" y="50" width="372" height="1" fill="rgba(255,255,255,0.08)"/>
+          <!-- central owned data source -->
+          <circle cx="120" cy="170" r="46" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
+          <text x="120" y="166" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="13" fill="#F5C518">YOUR FANS</text>
+          <text x="120" y="182" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="rgba(255,255,255,0.5)">owned by you</text>
+          <!-- flow lines out to destinations (chip centers: 97, 151, 205, 259) -->
+          <g stroke="rgba(245,197,24,0.3)" stroke-width="1.5">
+            <line x1="164" y1="158" x2="274" y2="97"/>
+            <line x1="166" y1="168" x2="274" y2="151"/>
+            <line x1="166" y1="180" x2="274" y2="205"/>
+            <line x1="164" y1="190" x2="274" y2="259"/>
           </g>
-          <!-- closed wall -->
-          <line x1="196" y1="58" x2="196" y2="138" stroke="rgba(255,255,255,0.22)" stroke-width="2.5"/>
-          <line x1="204" y1="58" x2="204" y2="138" stroke="rgba(255,255,255,0.1)" stroke-width="2.5"/>
-          <text x="305" y="94" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.32)">stuck inside their walls</text>
-
-          <!-- divider -->
-          <rect x="24" y="166" width="372" height="1" fill="rgba(255,255,255,0.1)"/>
-
-          <!-- BOTTOM: OPENSTAGE, unlocked -->
-          <text x="24" y="196" font-family="Anton, sans-serif" font-size="13" fill="#F5C518" letter-spacing="1">OPENSTAGE</text>
-          <!-- owned data source -->
-          <circle cx="120" cy="272" r="46" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
-          <text x="120" y="264" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="12" fill="#F5C518">YOUR FANS</text>
-          <!-- unlocked padlock icon (open shackle) -->
-          <g transform="translate(110,276)">
-            <path d="M3 7 v-4 a7 7 0 0 1 13 -2.5" fill="none" stroke="#F5C518" stroke-width="2"/>
-            <rect x="0" y="7" width="20" height="15" rx="2.5" fill="#F5C518"/>
-            <circle cx="10" cy="14" r="1.6" fill="#161000"/>
-          </g>
-          <!-- flow lines out (chip centers: 215, 272, 329) -->
-          <g stroke="rgba(245,197,24,0.4)" stroke-width="1.5">
-            <line x1="164" y1="262" x2="274" y2="215"/>
-            <line x1="166" y1="272" x2="274" y2="272"/>
-            <line x1="164" y1="282" x2="274" y2="329"/>
-          </g>
+          <!-- arrowheads pointing right into chips -->
           <g fill="#F5C518">
-            <path d="M274 215 l-9 -4 0 8 z"/>
-            <path d="M274 272 l-9 -4 0 8 z"/>
-            <path d="M274 329 l-9 -4 0 8 z"/>
+            <path d="M274 97 l-9 -4 0 8 z"/>
+            <path d="M274 151 l-9 -4 0 8 z"/>
+            <path d="M274 205 l-9 -4 0 8 z"/>
+            <path d="M274 259 l-9 -4 0 8 z"/>
           </g>
           <!-- destination chips -->
           <g font-family="Inter, sans-serif" font-size="11">
-            <rect x="280" y="198" width="116" height="34" rx="8" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
-            <text x="338" y="219" text-anchor="middle" fill="#F5C518">Your AI</text>
-            <rect x="280" y="255" width="116" height="34" rx="8" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
-            <text x="338" y="276" text-anchor="middle" fill="#F5C518">Your tools</text>
-            <rect x="280" y="312" width="116" height="34" rx="8" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
-            <text x="338" y="333" text-anchor="middle" fill="#F5C518">Anywhere</text>
+            <rect x="280" y="80" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
+            <text x="338" y="101" text-anchor="middle" fill="#DEDEDE">Claude</text>
+            <rect x="280" y="134" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
+            <text x="338" y="155" text-anchor="middle" fill="#DEDEDE">Your CRM</text>
+            <rect x="280" y="188" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
+            <text x="338" y="209" text-anchor="middle" fill="#DEDEDE">Your stack</text>
+            <rect x="280" y="242" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
+            <text x="338" y="263" text-anchor="middle" fill="#DEDEDE">Anywhere</text>
           </g>
         </svg>
       </div>
@@ -461,7 +448,6 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
 <section style="background:var(--black);">
   <div class="w">
     <h2 class="big" style="font-size:clamp(34px,4.6vw,52px); color:var(--gold); text-align:center;">What You Can Do</h2>
-    <p style="font-size:17px; color:var(--off); line-height:1.6; text-align:center; max-width:660px; margin:0 auto 40px;">You don't need a team to get results like you have one. MCP puts the power in your hands to build your world and deliver better experiences for your fans. All from plain English prompts.</p>
     <div class="uc-headrow">
       <div></div>
       <div class="uc-axis">Ask a question</div>
@@ -470,27 +456,75 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
     <div class="uc-block">
       <div class="uc-cat-name">Acquisition</div>
       <div class="uc">Where are my most valuable fans coming from?</div>
-      <div class="uc act">Build me a plan to reach more fans like them.</div>
+      <div class="uc act">Build me a plan to find more fans like my best ones.</div>
     </div>
     <div class="uc-block">
       <div class="uc-cat-name">Engagement</div>
       <div class="uc">Who are my most engaged fans right now?</div>
-      <div class="uc act">Tell me how to keep these fans engaged.</div>
+      <div class="uc act">Summarize my top fans and what they need from me.</div>
     </div>
     <div class="uc-block">
       <div class="uc-cat-name">Conversion</div>
       <div class="uc">Who are my most engaged fans who haven't purchased?</div>
-      <div class="uc act">Write me a campaign to convert them.</div>
+      <div class="uc act">Draft the messaging for a win-back campaign.</div>
     </div>
     <div class="uc-block">
       <div class="uc-cat-name">Retention</div>
-      <div class="uc">Are there unusual churn spikes in the last 180 days, and why?</div>
-      <div class="uc act">Give me a plan to win them back.</div>
+      <div class="uc">Which fans are about to churn, and why?</div>
+      <div class="uc act">Build a 6-month plan to keep my superfans active.</div>
     </div>
     <div class="uc-block">
       <div class="uc-cat-name">Expansion</div>
       <div class="uc">Which fans are ready to spend more, and on what?</div>
-      <div class="uc act">Show me how to turn them into buyers.</div>
+      <div class="uc act">Map out a premium tier for my superfans.</div>
+    </div>
+  </div>
+</section>
+<!-- BEFORE / AFTER -->
+<section style="background:var(--black);">
+  <div class="w">
+    <h2 class="big" style="font-size:clamp(34px,4.6vw,52px); color:var(--gold); text-align:center;">Before and After</h2>
+    <div class="ba-grid">
+      <div>
+        <div class="ba-col-head old">Before</div>
+        <div class="ba-cell old">Make sense of your data first</div>
+        <div class="ba-cell old">Translate numbers into something you can act on</div>
+        <div class="ba-cell old">Hire an expert to read it for you</div>
+        <div class="ba-cell old">Find the hours you don't have</div>
+        <div class="ba-cell old">Wrangle a stack of disconnected tools</div>
+        <div class="ba-cell old">Stitch data across platforms by hand</div>
+      </div>
+      <div>
+        <div class="ba-col-head new">With MCP</div>
+        <div class="ba-cell new">Ask in plain English, get a real answer</div>
+        <div class="ba-cell new">The insight comes back already actionable</div>
+        <div class="ba-cell new">Your AI does it, no one to hire</div>
+        <div class="ba-cell new">It runs in seconds, not days</div>
+        <div class="ba-cell new">One connection, inside your AI</div>
+        <div class="ba-cell new">It all lives in one place, ready to query</div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CASE STUDY -->
+<section style="background:var(--black);">
+  <div class="w">
+    <h2 class="big" style="font-size:clamp(34px,4.6vw,52px); margin-bottom:8px; color:var(--gold); text-align:center;">MCP in action</h2>
+    <p style="font-size:17px; color:var(--off); line-height:1.6; text-align:center; max-width:660px; margin:0 auto 40px;">You don't need a team to get results like you have one. MCP puts the power in your hands to build your world and deliver better experiences for your fans.</p>
+    <div class="case">
+      <div class="case-top">
+        <div class="case-sub">Jungle</div>
+      </div>
+      <p class="case-lead">Within minutes, connected to Jungle's live fan data, Claude produced a full slate of strategy, analysis, and creative direction. All from plain English prompts.</p>
+      <!-- the eight outputs -->
+      <div class="pgrid">
+        <div class="pc"><div class="pn">1</div><div><div class="pask">"Give me a 6-month fan engagement strategy."</div><div class="ptit">A complete strategy, built from real numbers</div></div></div>
+        <div class="pc"><div class="pn">2</div><div><div class="pask">"Who are my most engaged fans who haven't purchased?"</div><div class="ptit">XX,XXX fans ready to buy. Exactly who they are.</div></div></div>
+        <div class="pc"><div class="pn">3</div><div><div class="pask">"Are there unusual churn spikes in the last 180 days?"</div><div class="ptit">Exactly why fans are leaving. And what to fix.</div></div></div>
+        <div class="pc"><div class="pn">4</div><div><div class="pask">"Break my audience into tiers by engagement and value."</div><div class="ptit">XXX superfans driving XX% of revenue.</div></div></div>
+        <div class="pc"><div class="pn">5</div><div><div class="pask">"What's our fan lifetime value by geography?"</div><div class="ptit">[Market] fans worth Xx your average. Act on it.</div></div></div>
+        <div class="pc"><div class="pn">6</div><div><div class="pask">"Turn this into a :30 video, think Spotify Wrapped."</div><div class="ptit">X cards. Ready for Reels and TikTok.</div></div></div>
+      </div>
     </div>
   </div>
 </section>
