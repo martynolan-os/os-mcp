@@ -329,34 +329,58 @@ footer { padding:48px 48px; border-top:1px solid var(--bord); text-align:center;
         <p class="f-copy">Your fan data goes wherever you do. Filter it, segment it, and bring it into whatever tools you and your team already use. Most platforms call it control. But only inside their walls. Openstage is actually open.</p>
       </div>
       <div class="feat-visual">
-        <svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg">
-          <rect x="0" y="0" width="420" height="300" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.08)"/>
-          <text x="24" y="34" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.42)" letter-spacing="1">YOUR DATA, ANYWHERE YOU WORK</text>
-          <rect x="24" y="50" width="372" height="1" fill="rgba(255,255,255,0.08)"/>
-          <!-- central owned data source -->
-          <circle cx="120" cy="170" r="46" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
-          <text x="120" y="166" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="13" fill="#F5C518">YOUR FANS</text>
-          <text x="120" y="182" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="rgba(255,255,255,0.5)">owned by you</text>
-          <!-- flow lines out to destinations (chip centers: 110, 170, 230) -->
-          <g stroke="rgba(245,197,24,0.3)" stroke-width="1.5">
-            <line x1="164" y1="160" x2="274" y2="110"/>
-            <line x1="166" y1="170" x2="274" y2="170"/>
-            <line x1="164" y1="180" x2="274" y2="230"/>
+        <svg viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="420" height="360" rx="12" fill="#1C1C1C" stroke="rgba(255,255,255,0.08)"/>
+
+          <!-- TOP: OTHER PLATFORMS, locked -->
+          <text x="24" y="34" font-family="Inter, sans-serif" font-size="11" fill="rgba(255,255,255,0.42)" letter-spacing="1">OTHER PLATFORMS</text>
+          <!-- data locked in -->
+          <circle cx="120" cy="98" r="42" fill="#161616" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+          <text x="120" y="92" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="12" fill="rgba(255,255,255,0.5)">YOUR DATA</text>
+          <!-- locked padlock icon (closed shackle) -->
+          <g transform="translate(110,104)">
+            <path d="M3 7 v-4 a7 7 0 0 1 14 0 v4" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
+            <rect x="0" y="7" width="20" height="15" rx="2.5" fill="rgba(255,255,255,0.45)"/>
+            <circle cx="10" cy="14" r="1.6" fill="#161616"/>
           </g>
-          <!-- arrowheads pointing right into chips -->
+          <!-- closed wall -->
+          <line x1="196" y1="58" x2="196" y2="138" stroke="rgba(255,255,255,0.22)" stroke-width="2.5"/>
+          <line x1="204" y1="58" x2="204" y2="138" stroke="rgba(255,255,255,0.1)" stroke-width="2.5"/>
+          <text x="305" y="94" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="rgba(255,255,255,0.32)">stuck inside their walls</text>
+
+          <!-- divider -->
+          <rect x="24" y="166" width="372" height="1" fill="rgba(255,255,255,0.1)"/>
+
+          <!-- BOTTOM: OPENSTAGE, unlocked -->
+          <text x="24" y="196" font-family="Anton, sans-serif" font-size="13" fill="#F5C518" letter-spacing="1">OPENSTAGE</text>
+          <!-- owned data source -->
+          <circle cx="120" cy="272" r="46" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
+          <text x="120" y="264" text-anchor="middle" font-family="Barlow Condensed, sans-serif" font-weight="800" font-size="12" fill="#F5C518">YOUR FANS</text>
+          <!-- unlocked padlock icon (open shackle) -->
+          <g transform="translate(110,276)">
+            <path d="M3 7 v-4 a7 7 0 0 1 13 -2.5" fill="none" stroke="#F5C518" stroke-width="2"/>
+            <rect x="0" y="7" width="20" height="15" rx="2.5" fill="#F5C518"/>
+            <circle cx="10" cy="14" r="1.6" fill="#161000"/>
+          </g>
+          <!-- flow lines out (chip centers: 215, 272, 329) -->
+          <g stroke="rgba(245,197,24,0.4)" stroke-width="1.5">
+            <line x1="164" y1="262" x2="274" y2="215"/>
+            <line x1="166" y1="272" x2="274" y2="272"/>
+            <line x1="164" y1="282" x2="274" y2="329"/>
+          </g>
           <g fill="#F5C518">
-            <path d="M274 110 l-9 -4 0 8 z"/>
-            <path d="M274 170 l-9 -4 0 8 z"/>
-            <path d="M274 230 l-9 -4 0 8 z"/>
+            <path d="M274 215 l-9 -4 0 8 z"/>
+            <path d="M274 272 l-9 -4 0 8 z"/>
+            <path d="M274 329 l-9 -4 0 8 z"/>
           </g>
           <!-- destination chips -->
           <g font-family="Inter, sans-serif" font-size="11">
-            <rect x="280" y="93" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
-            <text x="338" y="114" text-anchor="middle" fill="#DEDEDE">Your AI</text>
-            <rect x="280" y="153" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
-            <text x="338" y="174" text-anchor="middle" fill="#DEDEDE">Your tools</text>
-            <rect x="280" y="213" width="116" height="34" rx="8" fill="#161616" stroke="rgba(255,255,255,0.14)"/>
-            <text x="338" y="234" text-anchor="middle" fill="#DEDEDE">Anywhere</text>
+            <rect x="280" y="198" width="116" height="34" rx="8" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
+            <text x="338" y="219" text-anchor="middle" fill="#F5C518">Your AI</text>
+            <rect x="280" y="255" width="116" height="34" rx="8" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
+            <text x="338" y="276" text-anchor="middle" fill="#F5C518">Your tools</text>
+            <rect x="280" y="312" width="116" height="34" rx="8" fill="rgba(245,197,24,0.12)" stroke="#F5C518" stroke-width="1.5"/>
+            <text x="338" y="333" text-anchor="middle" fill="#F5C518">Anywhere</text>
           </g>
         </svg>
       </div>
